@@ -1,6 +1,8 @@
 #include <unistd.h>
 
+#include "gnarl_config.h"
 #include "oled.h"
+
 
 void app_main() {
 	oled_init();

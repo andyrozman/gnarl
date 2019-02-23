@@ -1,4 +1,5 @@
 #include <pins_arduino.h>
+#include "gnarl_config.h"
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wignored-qualifiers"
@@ -9,13 +10,35 @@ extern "C" {
 #include "oled.h"
 }
 
-static SSD1306 d(0x3C, OLED_SDA, OLED_SCL);
+
+#define LEDPIN 2
+#define OLED_I2C_ADDR 0x3C
+#define OLED_RESET 16
+
+#ifdef GNARL_DEVICE_TTGO_V1
+
+	#define XOLED_SDA 4
+	#define XOLED_SCL 15
+
+#endif
+
+#ifdef GNARL_DEVICE_TTGO_V2
+
+	#define XOLED_SDA 21
+	#define XOLED_SCL 22
+
+#endif
+
+static SSD1306 d(OLED_I2C_ADDR, XOLED_SDA, XOLED_SCL);
 
 void oled_init() {
-	pinMode(OLED_RST, OUTPUT);
-	digitalWrite(OLED_RST, LOW);
-	delay(50);
-	digitalWrite(OLED_RST, HIGH);
+
+	pinMode(OLED_RESET , OUTPUT);
+  	pinMode(LEDPIN,OUTPUT); // might be unneeded ??
+
+  	digitalWrite(OLED_RESET, LOW);    // set GPIO16 low to reset OLED
+  	delay(50);
+  	digitalWrite(OLED_RESET, HIGH); // while OLED is running, must set GPIO16 in high
 
 	d.init();
 	d.flipScreenVertically();

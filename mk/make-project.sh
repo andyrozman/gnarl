@@ -27,6 +27,19 @@ create_project() {
     cd main
     > component.mk
     ln -sv ../../$src/* .
+    ln -s ../../gnarl_config.h .
+
+    cd ../..
+
+    cd components/oled
+
+    rm -f gnarl_config.h
+    ln -sv ../../gnarl_config.h .
+
+    cd ../radio
+
+    rm -f gnarl_config.h
+    ln -sv ../../gnarl_config.h .
 
     cd ../..
 }

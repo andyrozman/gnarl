@@ -132,3 +132,33 @@ To build the `blink` project, for example:
 
 After flashing applications that print information on the serial console,
 run `make monitor` to see the output.
+
+
+## TTGO V2
+
+Device Link: [Link on Ali Express](https://www.aliexpress.com/item/1-Pcs-TTGO-LORA32-V2-0-433-868-915Mhz-ESP32-LoRa-OLED-0-96-Inch-SD/32847471775.html?spm=2114.search0104.3.10.2beb15725I8Qik&ws_ab_test=searchweb0_0,searchweb201602_10_10065_10068_319_317_10696_10084_453_10083_454_10618_10304_10307_10820_10821_537_10302_536_10902_10059_10884_10887_321_322_10103,searchweb201603_6,ppcSwitch_0&algo_expid=445593bd-79d1-42c9-952f-a9c25a0a78a0-1&algo_pvid=445593bd-79d1-42c9-952f-a9c25a0a78a0&transAbTest=ae803_4)
+Git Link: [Link to GIT repository](https://github.com/LilyGO/TTGO-LORA32-V2.0/)
+Specification: [TTGO LoRa32 V2.0 Pinout v3.0.pdf](https://www.thethingsnetwork.org/forum/uploads/default/original/2X/4/4eb4d5846cf0a7fbaeabbad3c0b0cdde2faecb23.pdf)
+
+To get V2 working, you will need to do some changes in code, and also some hardware changes:
+    You need to wire: (look at specification)
+       - DIO1 to 33
+       - DIO2 to 32
+
+
+1. Set XTAL Frequency to 40 Mhz:
+    make menuconfig
+       Component config -> ESP32-Specific -> Main XTAL Frequency
+       Set to 40 Mhz
+
+    cp sdkconfig ../mk/
+
+    This will keep your configuration for all the projects.
+
+2. Set device in config.h
+
+     #define TTGO_V2
+
+     and comment all other device configurations (we only had TTGO_V2 and TTGO_V1 at time of this changes)
+
+
