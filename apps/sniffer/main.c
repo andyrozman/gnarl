@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <time.h>
 
 #include <esp_task_wdt.h>
 
@@ -60,7 +61,15 @@ void app_main() {
 		int rssi = read_rssi();
 		int count = rx_packet_count();
 
-		printf("(RSSI = %d, # bytes = %d, count = %d)\n", rssi, n, count);
+		time_t current_time;
+            char* c_time_string;
+
+            /* Obtain current time. */
+            current_time = time(NULL);
+
+            c_time_string = ctime(&current_time);
+
+		printf("[%s] (RSSI = %d, # bytes = %d, count = %d)\n", c_time_string, rssi, n, count);
 		display_info(rssi, count);
 	}
 }
