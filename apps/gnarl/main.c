@@ -3,8 +3,9 @@
 #include "display.h"
 #include "gnarl.h"
 #include "rfm95.h"
+#include "gnarl_config.h"
 
-#define PUMP_FREQUENCY 916600000
+//#define PUMP_FREQUENCY 916600000
 
 void app_main() {
 	initArduino();

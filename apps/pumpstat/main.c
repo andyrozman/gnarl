@@ -3,10 +3,10 @@
 
 #include "commands.h"
 #include "oled.h"
-#include "pump.h"
+#include "gnarl_config.h"
 #include "rfm95.h"
 
-#define PUMP_FREQUENCY	916600000
+
 
 int basal_rate, basal_minutes;
 int reservoir_level;
@@ -36,9 +36,9 @@ char str[100];
 
 void display_info() {
 	oled_clear();
-	font_medium();
+	font_small();
 	align_left();
-	sprintf(str, "%d.%d U/hr  %d min", FP1(basal_rate), basal_minutes);
+	sprintf(str, "Basal: %d.%d U/hr  %d min", FP1(basal_rate), basal_minutes);
 	draw_string(0, 0, str);
 	sprintf(str, "%d.%dU  %d.%02dV", FP1(reservoir_level), FP2(battery_level));
 	draw_string(0, 21, str);
@@ -51,7 +51,7 @@ void splash() {
 	oled_on();
 	font_large();
 	align_center_both();
-	draw_string(64, 32, "Hello");
+	draw_string(64, 32, "Pump Stat");
 	oled_update();
 }
 
